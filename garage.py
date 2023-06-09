@@ -8,7 +8,8 @@
 import random 
 
 class Garage():
-    def __init__(self):
+    def __init__(self, name):
+        self.name = name
         self.ticket = None
         self.parking_spaces = {}
         self.payment = None
@@ -86,111 +87,108 @@ class Garage():
 
     def manager(self):
         
-        response = input("What would you like to do: track spaces, remove car, change managers")
-        if response.lower() == "track spaces":
+        count = 1
+
+        while True:
+            response = input("What would you like to do: track spaces, remove car, change managers, or quit. ")
+            if response.lower() == "track spaces":
+                
+                if count == 1:
+
+                    for i in range(1, 8):
+
+                        park_space = list(range(1,100,1))
+                        space_filled = random.choice(park_space)
+
+                        self.parking_spaces['level'] = self.parked_car['level']
+
+                        if self.parking_spaces['level'] == f'level {i}':
+                            self.parking_spaces[f"level {i}"] = space_filled - 1
+                        else:
+                            self.parking_spaces[f"level {i}"] = space_filled
+           
+
+                for j in range(1, 8):
+                    if f'level {j}' == self.parking_spaces['level']:
+                        print(f'Level {j}: {self.parking_spaces[f"level {j}"]} - User is on this level.')
+                    else:
+                        print(f'Level {j}: {self.parking_spaces[f"level {j}"]}')
+
+                count += 1                
             
-            for i in range(1, 8):
+            elif response.lower() == "remove car":
+                if count == 1:
 
-                park_space = list(range(1,100,1))
-                space_filled = random.choice(park_space)
+                    for i in range(1, 8):
 
-                self.parking_spaces['level'] = self.parked_car['level']
+                        park_space = list(range(1,100,1))
+                        space_filled = random.choice(park_space)
 
-                if self.parking_spaces['level'] == f'level {i}':
-                    self.parking_spaces[f"level {i}"] = space_filled - 1
+                        self.parking_spaces['level'] = self.parked_car['level']
+
+                        if self.parking_spaces['level'] == f'level {i}':
+                            self.parking_spaces[f"level {i}"] = space_filled - 1
+                        else:
+                            self.parking_spaces[f"level {i}"] = space_filled
+
+
+                response2 = input("What level do you want to tow a car out of?  You can type back to exit. ")
+                if response2.lower() == "level 1" or response2.lower() == "level 2" or response2.lower() == "level 3" or response2.lower() == "level 4" or response2.lower() == "level 5" or response2.lower() == "level 6" or response2.lower() == "level 7":
+                    if self.parking_spaces[response2] == 1 and self.parking_spaces["level"] == response2:
+                        print("User is the only car on this level.")
+                    elif self.parking_spaces[response2] == 0:
+                        print("This level is already empty.")
+                    else:
+                        self.parking_spaces[response2] -= 1
+                        print(f"You have removed 1 car from {response2}.")
+
+                elif response2.lower() == "back":
+                    print("You did not tow any cars.")
+
                 else:
-                    self.parking_spaces[f"level {i}"] = space_filled
-
-            
-
-            for j in range(1, 8):
-                if f'level {j}' == self.parking_spaces['level']:
-                    print(f'Level {j}: {self.parking_spaces[f"level {j}"]} - User is on this level.')
-                else:
-                    print(f'Level {j}: {self.parking_spaces[f"level {j}"]}')
-            
-            
-            
+                    print("Sorry, that is not a valid input.")
+                count += 1
                 
 
-                
-                # space_filled = random.choice(park_space)
-                # self.parked_car["level 2"] = space_filled
-                # if self.parked_car['level'] == 'level 2':
-                #     self.parked_car["level 2"] = space_filled - 1
-
-                
-                # space_filled = random.choice(park_space)
-                # self.parked_car["level 3"] = space_filled
-                # if self.parked_car['level'] == 'level 3':
-                #     self.parked_car["level 3"] = space_filled - 1
-
-                
-                # space_filled = random.choice(park_space)
-                # self.parked_car["level 4"] = space_filled
-                # if self.parked_car['level'] == 'level 4':
-                #     self.parked_car["level 4"] = space_filled - 1
-
-                
-                # space_filled = random.choice(park_space)
-                # self.parked_car["level 5"] = space_filled
-                # if self.parked_car['level'] == 'level 5':
-                #     self.parked_car["level 5"] = space_filled - 1
-
-                
-                # space_filled = random.choice(park_space)
-                # self.parked_car["level 6"] = space_filled
-                # if self.parked_car['level'] == 'level 6':
-                #     self.parked_car["level 6"] = space_filled - 1
-
-                
-                # space_filled = random.choice(park_space)
-                # self.parked_car["level 7"] = space_filled
-                # if self.parked_car['level'] == 'level 7':
-                #     self.parked_car["level 7"] = space_filled - 1
-
-            
-            
-
-            
+            elif response.lower() == "quit":
+                break
 
 
-        # response = int(input(f"Thanks for parking at the Maryan Garage. You owe {self.parked_car['price']} dollars. Please choose the amount you are going to input: "))
-        # self.payment = response
+            elif response.lower() == "change managers":
+                print(f"The current manager is {self.name}.")
+                self.name = input("Who would you like to make the new manager? ")
+                print(f"Congratulations!! {self.name.title()}, you are the new manager.")
 
-        
-        # if self.payment == self.parked_car['price']:
-        #     print("You gave us exact change. Have a nice day!")
-            
-        # elif self.payment < self.parked_car['price']:
-        #     print(f"You gave us {self.payment}. You still owe us {self.parked_car['price'] - self.payment}.")
 
-        # elif self.payment > self.parked_car['price']:
-        #     print(f"Here's your change. We owe you {self.payment - self.parked_car['price']}")
+            else:
+                print("sorry, that is not a valid input.")
 
-        # elif self.payment < 0:
-        #     print("Please enter a positive number.We need are money. Tmes are tough.")
 
         
 
     def run(self):
 
         while True:
-            response = input(f"Hi there! There are {self.parking} parking spaces available! Do you want to take a ticket? y/n ")
+            response = input(f"Hi there! There are 700 total spots in our garage. Do you want to take a ticket? y/n ")
             if response.lower() in ('y', 'yes'):
                 self.take_ticket()
+            elif response.lower() in ('n', 'no'):
+                break
+            else:
+                print("Sorry, that is not a valid input.")
             
-            response_2 = input(f"What do you want to do? leave garage, manager mode")
+            response_2 = input(f"What do you want to do? leave garage, manager mode, or quit ")
             if response_2.lower() == "leave garage":
                 self.leave_garage()
             elif response_2.lower() == "manager mode":
                 self.manager()
+            
                 
             #elif:  
             #    print()
 
 
-maryan = Garage()
+maryan = Garage("Marc")
 
 maryan.run()
 
