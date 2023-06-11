@@ -6,6 +6,8 @@
 
 """
 import random 
+# import requests
+
 
 class Garage():
     def __init__(self, name):
@@ -16,6 +18,7 @@ class Garage():
         self.parked_car = {}
         self.managers = None
         self.parking = None
+        self.car = None
 
     def take_ticket(self):
         parking_space_list = list(range(1,100,1))
@@ -49,6 +52,7 @@ class Garage():
 
         else:
             print("Please input a valid response!")
+
 
     def leave_garage(self):
         print(f"Thanks for parking at the Maryan Garage. You owe {self.parked_car['price']} dollars.")
@@ -162,8 +166,6 @@ class Garage():
 
             else:
                 print("sorry, that is not a valid input.")
-
-
         
 
     def run(self):
@@ -184,8 +186,7 @@ class Garage():
                 self.manager()
             
                 
-            #elif:  
-            #    print()
+        
 
 
 maryan = Garage("Marc")
