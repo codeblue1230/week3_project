@@ -25,7 +25,7 @@ class Garage():
         random_space = random.choice(parking_space_list)
 
         print("Welcome to the Maryan Garage! The prices are as listed: ")
-        response = input("Level 1 - $10, Level 2 - $8, Level 3 through 7 - $5 \n Which level would you like to park at?")
+        response = input("Level 1 - $10, Level 2 - $8, Level 3 through 7 - $5 \nWhich level would you like to park at? ")
         if response.lower() == "level 1":
             
             self.parked_car['level'] = response
